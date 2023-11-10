@@ -1,0 +1,34 @@
+name: Java CI Pipeline
+
+on:
+  push:
+    branches:
+      - master
+      - 'future/*'  # Corrected single quotes around 'future/*'
+
+jobs:
+  Mavenbuild:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Code checkout  # Fixed indentation
+        uses: actions/checkout@v3
+
+      - name: Setup Java version
+        uses: actions/setup-java@v2  # Corrected typo in 'setup-jave' and used version 2
+        with:
+          distribution: 'adopt'  # Corrected typo in 'oracle jdk'
+          java-version: '8'
+
+      - name: Check Java version
+        run: |
+          java -version
+
+      - name: List files in the current directory
+        run: |
+          pwd
+          ls -ltr
+
+      - name: Build with Maven
+        run: |
+          mvn clean install
